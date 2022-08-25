@@ -3,10 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start:dev": "npm-run-all -p tailwind:watch dev",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "tailwind:watch": "npx tailwindcss -i ./styles/tailwind.css -o ./styles/tailwind.build.css --watch",
+    "tailwind:build": "npx tailwindcss build -i ./styles/tailwind.css -o ./styles/tailwind.build.css --minify",
+    "build:stg": "yarn tailwind:build && env-cmd -f .env.stg react-scripts build",
+    "build:prod": "yarn tailwind:build && env-cmd -f .env.production react-scripts build"
   },
   "dependencies": {
     "next": "12.2.5",
@@ -14,7 +19,11 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.8",
     "eslint": "8.22.0",
-    "eslint-config-next": "12.2.5"
+    "eslint-config-next": "12.2.5",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.16",
+    "tailwindcss": "^3.1.8"
   }
 }
